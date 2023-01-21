@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/ualiyevvv/finmonitoring#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "neo4j-driver": "^5.4.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
