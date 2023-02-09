@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <title>neo4jd3.js</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/neo4jd3.min.css">
+        <style>
+            body,
+            html,
+            .neo4jd3 {
+                height: 100%;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <form>
+            <label>Input 1: <input type="text" id="input1" value="AEBCBGFAADCE"></label>
+            <br>
+            <label>Input 2: <input type="text" id="input2" value="JGAGBDDAACHH"></label>
+            <br>
+            <button id="submit-button">Submit</button>
+            <!-- <button id="getAll-button">getAll</button> -->
+          </form>
+        <div id="neo4jd3"></div>
+
+        <!-- Scripts -->
+        <script src="js/d3.min.js"></script>
+        <script src="js/n2.js"></script>
+        <script type="text/javascript">
+
+            function init(jsona) {
+                var data = jsona
+
+        var newnodes = []
+        var newrels = []
+
+        let originalArray = data[0]._fields;
+
+        originalArray.forEach(function(object) {
+        
+            if (!object.labels) {
+                // console.log(object)
+                newrels.push({
+                    "id": object.identity.low.toString(),
+                    "startNode": object.start.low.toString(),
+                    "endNode": object.end.low.toString(),
+                    "properties": object.properties,
+                    "type": object.type,
+                });
+            } else {
+                newnodes.push({
+                    "id": object.identity.low.toString(),
+                    "labels": object.labels,
+                    "properties": object.properties
+                })
+            }
+        });
+
+        var resultData = {
+            "results": [{
+                "data": [{
+                    "graph": {
+                        "nodes": newnodes,
+                        "relationships": newrels 
+                    }
+                }]
+            }],
+            "errors": []
+        }
+
+                var neo4jd3 = new Neo4jd3(resultData, '#neo4jd3', {
+                    highlight: [
+                        {
+                            class: 'Project',
+                            property: 'name',
+                            value: 'neo4jd3'
+                        }, {
+                            class: 'User',
+                            property: 'userId',
+                            value: 'eisman'
+                        }
+                    ],
+                    icons: {
+//                        'Address': 'home',
+                        'Api': 'gear',
+//                        'BirthDate': 'birthday-cake',
+                        'Cookie': 'paw',
+//                        'CreditCard': 'credit-card',
+//                        'Device': 'laptop',
+                        'Email': 'at',
+                        'Git': 'git',
+                        'Github': 'github',
+                        'Google': 'google',
+//                        'icons': 'font-awesome',
+                        'Ip': 'map-marker',
+                        'Issues': 'exclamation-circle',
+                        'Language': 'language',
+                        'Options': 'sliders',
+                        'Password': 'lock',
+                        'Phone': 'phone',
+                        'Project': 'folder-open',
+                        'SecurityChallengeAnswer': 'commenting',
+                        'User': 'user',
+                        'zoomFit': 'arrows-alt',
+                        'zoomIn': 'search-plus',
+                        'zoomOut': 'search-minus'
+                    },
+                    images: {
+                        'Address': 'img/twemoji/1f3e0.svg',
+//                        'Api': 'img/twemoji/1f527.svg',
+                        'BirthDate': 'img/twemoji/1f382.svg',
+                        'Cookie': 'img/twemoji/1f36a.svg',
+                        'CreditCard': 'img/twemoji/1f4b3.svg',
+                        'Device': 'img/twemoji/1f4bb.svg',
+                        'Email': 'img/twemoji/2709.svg',
+                        'Git': 'img/twemoji/1f5c3.svg',
+                        'Github': 'img/twemoji/1f5c4.svg',
+                        'icons': 'img/twemoji/1f38f.svg',
+                        'Ip': 'img/twemoji/1f4cd.svg',
+                        'Issues': 'img/twemoji/1f4a9.svg',
+                        'Language': 'img/twemoji/1f1f1-1f1f7.svg',
+                        'Options': 'img/twemoji/2699.svg',
+                        'Password': 'img/twemoji/1f511.svg',
+//                        'Phone': 'img/twemoji/1f4de.svg',
+                        'Project': 'img/twemoji/2198.svg',
+                        'Project|name|neo4jd3': 'img/twemoji/2196.svg',
+//                        'SecurityChallengeAnswer': 'img/twemoji/1f4ac.svg',
+                        'User': 'img/twemoji/1f600.svg'
+//                        'zoomFit': 'img/twemoji/2194.svg',
+//                        'zoomIn': 'img/twemoji/1f50d.svg',
+//                        'zoomOut': 'img/twemoji/1f50e.svg'
+                    },
+                    minCollision: 60,
+                    neo4jDataUrl: '../json/neo4jData.json',
+                    nodeRadius: 25,
+                    onNodeDoubleClick: function(node) {
+                        switch(node.id) {
+                            case '25':
+                                // Google
+                                window.open(node.properties.url, '_blank');
+                                break;
+                            default:
+                                var maxNodes = 5,
+                                    data = neo4jd3.randomD3Data(node, maxNodes);
+                                neo4jd3.updateWithD3Data(data);
+                                break;
+                        }
+                    },
+                    onRelationshipDoubleClick: function(relationship) {
+                        console.log('double click on relationship: ' + JSON.stringify(relationship));
+                    },
+                    zoomFit: true
+                });
+            }
+
+            const input1 = document.getElementById('input1');
+            const input2 = document.getElementById('input2');
+            const submitButton = document.getElementById('submit-button');
+            // const getAllButton = document.getElementById('getAll-button');
+
+            submitButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                const data = { input1: input1.value, input2: input2.value };
+
+                fetch('http://localhost:3000/api/data/between?id_start='+input1.value+'&id_end='+input2.value, {
+                method: 'GET'
+                })
+                .then(function(response) { return response.json(); })
+                .then(function(json) {
+                    if (json.length != 0) {
+
+                        console.log(json)
+                        init(json)
+                    } else {
+                        alert("no matches")
+                    }
+                // use the json
+                });
+            });
+
+            // getAllButton.addEventListener('click', (e) => {
+            //     e.preventDefault();
+            //     const data = { input1: input1.value, input2: input2.value };
+
+            //     fetch('http://localhost:3000/api/data/all', {
+            //     method: 'GET'
+            //     })
+            //     .then(function(response) { return response.json(); })
+            //     .then(function(json) {
+            //         if (json.length != 0) {
+
+            //             console.log(json)
+            //             init(json)
+            //         } else {
+            //             alert("no matches")
+            //         }
+            //     // use the json
+            //     });
+            // });
+            
+            
+
+            // window.onload = init;
+        </script>
+    </body>
+</html>

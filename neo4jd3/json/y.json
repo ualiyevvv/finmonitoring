@@ -1,0 +1,56 @@
+{
+    "results": [{
+        "columns": ["EDUCATION", "EDU"],
+        "data": [{
+            "graph": {
+                "nodes": [
+                    {
+                        "id": 436,
+                        "start": 165,
+                        "labels": [
+                            "EDUCATION"
+                        ],
+                        "end": 106,
+                        "type": "УЧИЛСЯ",
+                        "properties": {
+                            "end_date": "25.06.2013",
+                            "source": "MON_RK",
+                            "start_date": "01.09.2005"
+                        }
+                    },
+                    {
+                        "id": 190,
+                        "labels": [
+                            "EDUCATION"
+                        ],
+                        "start": 167,
+                        "end": 106,
+                        "type": "УЧИЛСЯ",
+                        "properties": {
+                            "end_date": "11.01.2017",
+                            "source": "MON_RK",
+                            "start_date": "26.01.2015"
+                        }
+                    }
+                ],
+                "relationships": [
+                    {
+                        "id": 106,
+                        "labels": [
+                            "EDU"
+                        ],
+                        "startNode": "1",
+                        "endNode": "8",
+                        "properties": {
+                            "BIN:ID": "ABBBEAAADGCG",
+                            "name": "Школа 3"
+                        },
+                        "source": "1",
+                        "target": "8",
+                        "linknum": 1
+                    }
+                ]
+            }
+        }]
+    }]
+}

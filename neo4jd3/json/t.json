@@ -1,0 +1,101 @@
+	
+[
+    {
+      "keys": [
+        "a",
+        "b",
+        "c",
+        "r1",
+        "r2"
+      ],
+      "length": 5,
+      "_fields": [
+        {
+          "identity": {
+            "low": 165,
+            "high": 0
+          },
+          "labels": [
+            "EDUCATION"
+          ],
+          "properties": {
+            "name": "Clarette Cobelli",
+            "IIN:ID": "JGAGBDDAACHH"
+          }
+        },
+        {
+          "identity": {
+            "low": 167,
+            "high": 0
+          },
+          "labels": [
+            "EDUCATION"
+          ],
+          "properties": {
+            "name": "Katharyn Jerrans",
+            "IIN:ID": "AEBCBGFAADCE"
+          }
+        },
+        {
+          "identity": {
+            "low": 106,
+            "high": 0
+          },
+          "labels": [
+            "EDU"
+          ],
+          "properties": {
+            "BIN:ID": "ABBBEAAADGCG",
+            "name": "Школа 3"
+          }
+        },
+        {
+          "identity": {
+            "low": 436,
+            "high": 0
+          },
+          "start": {
+            "low": 165,
+            "high": 0
+          },
+          "end": {
+            "low": 106,
+            "high": 0
+          },
+          "type": "УЧИЛСЯ",
+          "properties": {
+            "end_date": "25.06.2013",
+            "source": "MON_RK",
+            "start_date": "01.09.2005"
+          }
+        },
+        {
+          "identity": {
+            "low": 190,
+            "high": 0
+          },
+          "start": {
+            "low": 167,
+            "high": 0
+          },
+          "end": {
+            "low": 106,
+            "high": 0
+          },
+          "type": "УЧИЛСЯ",
+          "properties": {
+            "end_date": "11.01.2017",
+            "source": "MON_RK",
+            "start_date": "26.01.2015"
+          }
+        }
+      ],
+      "_fieldLookup": {
+        "a": 0,
+        "b": 1,
+        "c": 2,
+        "r1": 3,
+        "r2": 4
+      }
+    }
+  ]

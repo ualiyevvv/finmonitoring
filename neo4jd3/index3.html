@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var data =  	
+[
+    {
+      "keys": [
+        "a",
+        "b",
+        "c",
+        "r1",
+        "r2"
+      ],
+      "length": 5,
+      "_fields": [
+        {
+          "identity": {
+            "low": 165,
+            "high": 0
+          },
+          "labels": [
+            "EDUCATION"
+          ],
+          "properties": {
+            "name": "Clarette Cobelli",
+            "IIN:ID": "JGAGBDDAACHH"
+          }
+        },
+        {
+          "identity": {
+            "low": 167,
+            "high": 0
+          },
+          "labels": [
+            "EDUCATION"
+          ],
+          "properties": {
+            "name": "Katharyn Jerrans",
+            "IIN:ID": "AEBCBGFAADCE"
+          }
+        },
+        {
+          "identity": {
+            "low": 106,
+            "high": 0
+          },
+          "labels": [
+            "EDU"
+          ],
+          "properties": {
+            "BIN:ID": "ABBBEAAADGCG",
+            "name": "Школа 3"
+          }
+        },
+        {
+          "identity": {
+            "low": 436,
+            "high": 0
+          },
+          "start": {
+            "low": 165,
+            "high": 0
+          },
+          "end": {
+            "low": 106,
+            "high": 0
+          },
+          "type": "УЧИЛСЯ",
+          "properties": {
+            "end_date": "25.06.2013",
+            "source": "MON_RK",
+            "start_date": "01.09.2005"
+          }
+        },
+        {
+          "identity": {
+            "low": 190,
+            "high": 0
+          },
+          "start": {
+            "low": 167,
+            "high": 0
+          },
+          "end": {
+            "low": 106,
+            "high": 0
+          },
+          "type": "УЧИЛСЯ",
+          "properties": {
+            "end_date": "11.01.2017",
+            "source": "MON_RK",
+            "start_date": "26.01.2015"
+          }
+        }
+      ],
+      "_fieldLookup": {
+        "a": 0,
+        "b": 1,
+        "c": 2,
+        "r1": 3,
+        "r2": 4
+      }
+    }
+  ]
+
+    var newnodes = []
+    var newrels = []
+
+    let originalArray = data[0]._fields;
+
+    originalArray.forEach(function(object) {
+        
+        if (!object.labels) {
+            // console.log(object)
+            newrels.push({
+                "id": object.identity.low.toString(),
+                "startNode": object.start.low.toString(),
+                "endNode": object.end.low.toString(),
+                "properties": object.properties,
+                "type": object.type,
+            });
+        } else {
+            newnodes.push({
+                "id": object.identity.low.toString(),
+                "labels": object.labels,
+                "properties": object.properties
+            })
+        }
+    });
+
+    var resultData = {
+                    "results": [{
+                        "data": [{
+                            "graph": {
+                                "nodes": newnodes,
+                                "relationships": newrels 
+                            }
+                        }]
+                    }],
+                    "errors": []
+                }
+
+    console.log(resultData);
+
+    </script>
+</body>
+</html>
