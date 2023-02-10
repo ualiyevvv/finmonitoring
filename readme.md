@@ -13,9 +13,9 @@ run a backend in development mode by the command `npm run dev`
 run a frontend in folder neo4jd3 index2.html (instead of react frontend 'cause there was some errors which i couldn't fixed)
 
 ## Stack of technologies
-Backend: Node.js, Express.js
-Frontend: React.js
-Database: Neo4j
+Backend: Node.js, Express.js <br>
+Frontend: React.js <br>
+Database: Neo4j <br>
 
 ## Team
 ```
