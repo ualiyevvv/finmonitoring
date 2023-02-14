@@ -23,7 +23,7 @@ export default function Router(){
 				<Route path='/authenticate' element={<Auth />} />
 				<Route path="/logout" element={<Logout />} />
 
-				<Route path="/mapgraph" element={<MapGraph />} />
+				<Route path="/mapgraph" element={<AuthMiddleware page={MapGraph} />} />
 			</Routes>
 		</AppContextProvider>
 	);
