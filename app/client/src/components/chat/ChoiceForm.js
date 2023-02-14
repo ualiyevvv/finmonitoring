@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import Cards from "../cards/Cards";
 import CardItem from "../cards/CardItem";
 
-import toggleArrayElement from '../../handlers/toggleArrayElement'
+import toggleArrayElement from '../../../../common/handlers/toggleArrayElement'
 
 //message={type=choice, id, items, selected, multiple_choice}
 export default function ChoiceForm({

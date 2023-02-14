@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import setIds from "../handlers/setIds";
-import findIndexById from "../handlers/findIndexById";
+import setIds from "../../../common/handlers/setIds";
+import findIndexById from "../../../common/handlers/findIndexById";
 
 export default function useFreshData({ socket, modelName }){
     const name = modelName.toLowerCase();

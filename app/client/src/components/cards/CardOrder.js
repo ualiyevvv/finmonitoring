@@ -1,5 +1,5 @@
 import React from 'react';
-import monthName from "../../handlers/monthName";
+import monthName from "../../../../common/handlers/monthName";
 
 export default function CardOrder({order,
                                       clientName="Казмунайгаз",

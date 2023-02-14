@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import monthName from "../../handlers/monthName";
+import monthName from "../../../../common/handlers/monthName";
 
 export default function Day({ date }){
 

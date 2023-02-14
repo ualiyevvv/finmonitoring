@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-import setIds from "../../../handlers/setIds";
+import setIds from "../../../../../common/handlers/setIds";
 import useFreshData from "../../../hooks/useFreshData";
 
 

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate} from "react-router-dom";
 
-import findIndexById from "../../handlers/findIndexById";
-import setIds from "../../handlers/setIds";
+import findIndexById from "../../../../common/handlers/findIndexById";
+import setIds from "../../../../common/handlers/setIds";
 import useFreshData from "../../hooks/useFreshData";
 
 function log(...str){
