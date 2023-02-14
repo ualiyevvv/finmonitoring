@@ -6,7 +6,7 @@ import PasswordsForm from "./registerForms/PasswordsForm";
 import LoginForm from "./loginForms/LoginForm";
 
 import MultistepForm from "../../components/form/MultistepForm";
-import {useLocation, useNavigate} from "react-router-dom";
+import {Navigate, useLocation, useNavigate} from "react-router-dom";
 import {useAppContext} from "../../context/AppContext";
 import Header from "../../components/Header";
 import Menu from "../../components/phone/Menu";
@@ -37,12 +37,6 @@ export default function Auth() {
     const [data, setData] = useState({})
     const [type, setType] = useState('login');
 
-    useEffect(()=>{
-        if(isAuthenticated()){
-           navigate('/profile', {replace: true})
-        }
-    }, []);
-
     function onSubmit(e){
         (async ()=>{
 
@@ -55,11 +49,11 @@ export default function Auth() {
                     navigate('/authenticate', {replace: true, state});
                 }
                 else{
-                    log("Successful login redirect to", location.state?.redirect ? location.state.redirect : '/profile');
+                    log("Successful login redirect to", location.state?.redirect ? location.state.redirect : '/');
 
                     delete state.redirect;
                     // console.log("navigate to", location.state.redirect, "\nstate", state);
-                    navigate(location.state?.redirect ? location.state.redirect : '/profile', {replace: true, state});
+                    navigate(location.state?.redirect ? location.state.redirect : '/', {replace: true, state});
                 }
             }
             else{
@@ -81,8 +75,12 @@ export default function Auth() {
         })()
     }
 
+
+    if(isAuthenticated()){
+        return <Navigate to={'/'} replace={true}/>
+    }
+
     return (
-        <>{!isAuthenticated() && 
         <div className='admin'>
             {device !== 'mobile' && <Header user={user} isAuthenticated={isAuthenticated} />}
 
@@ -144,6 +142,5 @@ export default function Auth() {
             {device === 'mobile' && <Menu />}
 
         </div>
-        }</>
     );
 }
