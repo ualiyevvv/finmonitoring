@@ -20,9 +20,9 @@
     </head>
     <body>
         <form>
-            <label>Input 1: <input type="text" id="input1" value="AEBCBGFAADCE"></label>
+            <label>Input 1: <input type="text" id="input1" value="ADADDBGABDFF"></label>
             <br>
-            <label>Input 2: <input type="text" id="input2" value="JGAGBDDAACHH"></label>
+            <label>Input 2: <input type="text" id="input2" value="BDAEAIGACEGG"></label>
             <br>
             <button id="submit-button">Submit</button>
             <!-- <button id="getAll-button">getAll</button> -->
@@ -39,27 +39,31 @@
 
         var newnodes = []
         var newrels = []
-
-        let originalArray = data[0]._fields;
-
+        console.log(data[0]._fields[0])
+        let originalArray = data[0]._fields[0].segments;
+        console.log(originalArray)
         originalArray.forEach(function(object) {
+            // console.log(object1)
+            for (let prop in object) {
         
-            if (!object.labels) {
-                // console.log(object)
-                newrels.push({
-                    "id": object.identity.low.toString(),
-                    "startNode": object.start.low.toString(),
-                    "endNode": object.end.low.toString(),
-                    "properties": object.properties,
-                    "type": object.type,
-                });
-            } else {
-                newnodes.push({
-                    "id": object.identity.low.toString(),
-                    "labels": object.labels,
-                    "properties": object.properties
-                })
-            }
+                if (!object[prop].labels) {
+                    // console.log(object)
+                    newrels.push({
+                        "id": object[prop].identity.low.toString(),
+                        "startNode": object[prop].start.low.toString(),
+                        "endNode": object[prop].end.low.toString(),
+                        "properties": object[prop].properties,
+                        "type": object[prop].type,
+                    });
+                } else {
+                    newnodes.push({
+                        "id": object[prop].identity.low.toString(),
+                        "labels": object[prop].labels,
+                        "properties": object[prop].properties
+                    })
+                }
+            };
+        
         });
 
         var resultData = {
@@ -176,6 +180,7 @@
                     if (json.length != 0) {
 
                         console.log(json)
+                        // console.log("asdas")
                         init(json)
                     } else {
                         alert("no matches")
