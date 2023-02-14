@@ -35,6 +35,8 @@
         <script type="text/javascript">
 
             function init(jsona) {
+                var indexes = [];
+                var indexesRel = [];
                 var data = jsona
 
         var newnodes = []
@@ -48,6 +50,7 @@
         
                 if (!object[prop].labels) {
                     // console.log(object)
+                    indexesRel.push(object[prop].identity.low.toString())
                     newrels.push({
                         "id": object[prop].identity.low.toString(),
                         "startNode": object[prop].start.low.toString(),
@@ -56,6 +59,7 @@
                         "type": object[prop].type,
                     });
                 } else {
+                    indexes.push(object[prop].identity.low.toString())
                     newnodes.push({
                         "id": object[prop].identity.low.toString(),
                         "labels": object[prop].labels,
@@ -144,17 +148,152 @@
                     neo4jDataUrl: '../json/neo4jData.json',
                     nodeRadius: 25,
                     onNodeDoubleClick: function(node) {
-                        switch(node.id) {
-                            case '25':
-                                // Google
-                                window.open(node.properties.url, '_blank');
-                                break;
-                            default:
-                                var maxNodes = 5,
-                                    data = neo4jd3.randomD3Data(node, maxNodes);
-                                neo4jd3.updateWithD3Data(data);
-                                break;
-                        }
+                        console.log("node id = ",node)
+                        console.log("node prop = ",node.properties)
+                        var maxNodes = 5, data = neo4jd3.randomD3Data(node, maxNodes,indexes, indexesRel);
+                        // var data = {
+                        //     nodes: [
+                        //         {
+                        //             id: "123123",
+                        //             x: node.x,
+                        //             y: node.y
+                        //         },
+                        //     ],
+                        //     relationships: []
+                        // }
+
+                        // data = {
+                        //     "nodes": [
+                        //         {
+                        //             "id": 6,
+                        //             "labels": [
+                        //                 "battery-empty"
+                        //             ],
+                        //             "properties": {
+                        //                 "random": "battery-empty"
+                        //             },
+                        //             "x": node.x,
+                        //             "y": node.y,
+                        //             "index": 5,
+                        //             "vy": -0.00007481636624008525,
+                        //             "vx": 0.004408813487530509
+                        //         },
+                        //         {
+                        //             "id": 7,
+                        //             "labels": [
+                        //                 "bars"
+                        //             ],
+                        //             "properties": {
+                        //                 "random": "bars"
+                        //             },
+                        //             "x": node.x,
+                        //             "y": node.y,
+                        //             "index": 6,
+                        //             "vy": 0.010029729683904727,
+                        //             "vx": 0.009108254735542875
+                        //         }
+                        //     ],
+                        //     "relationships": [
+                        //         {
+                        //             "id": 5,
+                        //             "type": "BATTERY-EMPTY",
+                        //             "startNode": "326",
+                        //             "endNode": 6,
+                        //             "properties": {
+                        //                 "from": 1676359769682
+                        //             },
+                        //             "source": {
+                        //                 "id": "326",
+                        //                 "labels": [
+                        //                     "EDUCATION"
+                        //                 ],
+                        //                 "properties": {
+                        //                     "name": "Urbain Renwick",
+                        //                     "IIN:ID": "ADADDBGABDFF"
+                        //                 },
+                        //                 "index": 0,
+                        //                 "x": node.x,
+                        //                 "y": node.y,
+                        //                 "vy": 0,
+                        //                 "vx": 0,
+                        //                 "fx": 288,
+                        //                 "fy": 340
+                        //             },
+                        //             "target": {
+                        //                 "id": 6,
+                        //                 "labels": [
+                        //                     "battery-empty"
+                        //                 ],
+                        //                 "properties": {
+                        //                     "random": "battery-empty"
+                        //                 },
+                        //                 "x": node.x,
+                        //                 "y": node.y,
+                        //                 "index": 5,
+                        //                 "vy": -0.00007481636624008525,
+                        //                 "vx": 0.004408813487530509
+                        //             },
+                        //             "linknum": 5,
+                        //             "index": 4
+                        //         },
+                        //         {
+                        //             "id": 6,
+                        //             "type": "BARS",
+                        //             "startNode": "326",
+                        //             "endNode": 7,
+                        //             "properties": {
+                        //                 "from": 1676359769682
+                        //             },
+                        //             "source": {
+                        //                 "id": "326",
+                        //                 "labels": [
+                        //                     "EDUCATION"
+                        //                 ],
+                        //                 "properties": {
+                        //                     "name": "Urbain Renwick",
+                        //                     "IIN:ID": "ADADDBGABDFF"
+                        //                 },
+                        //                 "index": 0,
+                        //                 "x": 288,
+                        //                 "y": 340,
+                        //                 "vy": 0,
+                        //                 "vx": 0,
+                        //                 "fx": 288,
+                        //                 "fy": 340
+                        //             },
+                        //             "target": {
+                        //                 "id": 7,
+                        //                 "labels": [
+                        //                     "bars"
+                        //                 ],
+                        //                 "properties": {
+                        //                     "random": "bars"
+                        //                 },
+                        //                 "x": 181.24206422399004,
+                        //                 "y": 285.4099709813139,
+                        //                 "index": 6,
+                        //                 "vy": 0.010029729683904727,
+                        //                 "vx": 0.009108254735542875
+                        //             },
+                        //             "linknum": 6,
+                        //             "index": 5
+                        //         }
+                        //     ]
+                        // }
+
+                        // neo4jd3.updateWithD3Data(data);
+
+                        // switch(node.id) {
+                        //     case '25':
+                        //         // Google
+                        //         window.open(node.properties.url, '_blank');
+                        //         break;
+                        //     default:
+                        //         var maxNodes = 5,
+                        //             data = neo4jd3.randomD3Data(node, maxNodes);
+                        //         neo4jd3.updateWithD3Data(data);
+                        //         break;
+                        // }
                     },
                     onRelationshipDoubleClick: function(relationship) {
                         console.log('double click on relationship: ' + JSON.stringify(relationship));

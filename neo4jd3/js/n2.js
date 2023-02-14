@@ -645,49 +645,147 @@
             return graph;
         }
     
-        function randomD3Data(d, maxNodesToGenerate) {
-            var data = {
-                    nodes: [],
-                    relationships: []
-                },
-                i,
-                label,
-                node,
-                numNodes = (maxNodesToGenerate * Math.random() << 0) + 1,
-                relationship,
-                s = size();
-    
-            for (i = 0; i < numNodes; i++) {
-                label = randomLabel();
-    
-                node = {
-                    id: s.nodes + 1 + i,
-                    labels: [label],
-                    properties: {
-                        random: label
-                    },
-                    x: d.x,
-                    y: d.y
-                };
-    
-                data.nodes[data.nodes.length] = node;
-    
-                relationship = {
-                    id: s.relationships + 1 + i,
-                    type: label.toUpperCase(),
-                    startNode: d.id,
-                    endNode: s.nodes + 1 + i,
-                    properties: {
-                        from: Date.now()
-                    },
-                    source: d.id,
-                    target: s.nodes + 1 + i,
-                    linknum: s.relationships + 1 + i
-                };
-    
-                data.relationships[data.relationships.length] = relationship;
+        function randomD3Data(d, maxNodesToGenerate, indexes, indexesRel) {
+            console.log("random dbclick")
+            console.log("indexes", indexes)
+            console.log("indexes rel", indexesRel)
+
+
+            console.log(d)
+            let prop = '';
+            let idobj = '';
+            if ("IIN:ID" in d.properties) {
+                console.log("IIN:ID");
+                prop = "IIN:ID";
+                idobj = d.properties["IIN:ID"]
+                console.log(idobj)
+            } else if ("BIN:ID" in d.properties) {
+                console.log("BIN:ID");
+                prop = "BIN:ID";
+                idobj = d.properties["BIN:ID"]
+                console.log(idobj)
             }
+
+            var fetchdata = ""
+
+            fetch('http://localhost:3000/api/data/bynode?prop='+prop+'&id='+idobj, {
+                method: 'GET'
+                })
+                .then(function(response) { return response.json(); })
+                .then(function(json) {
+                    if (json.length != 0) {
+
+                        console.log("json  == ", json)
+                        // console.log("asdas")
+                        fetchdata = json
+                        console.log("feetchh = ", fetchdata)
+                        var newnodes = []
+                        var newrels = []
+                        console.log("feetch  ==  ", fetchdata[0]._fields)
+                        // console.log("fetchdata ==== ", fetchdata[0]._fields[0])
+                        for (let i=0;i<fetchdata.length;i++) {
+                            let originalArray = fetchdata[i]._fields[0].segments;
+                            console.log(originalArray)
+                            originalArray.forEach(function(object) {
+                                // console.log(object1)
+                                for (let prop in object) {
+                                    if (prop == "start") continue;
+                            
+                                    if (!object[prop].labels) {
+                                        if (indexesRel.includes(object[prop].identity.low.toString())) {
+                                            continue
+                                        }
+                                        // console.log(object)
+                                        newrels.push({
+                                            "id": object[prop].identity.low.toString(),
+                                            "startNode": object[prop].start.low.toString(),
+                                            "endNode": object[prop].end.low.toString(),
+                                            "properties": object[prop].properties,
+                                            "type": object[prop].type,
+                                        });
+                                    } else {
+                                        if (indexes.includes(object[prop].identity.low.toString())) {
+                                            continue
+                                        }
+                                        newnodes.push({
+                                            "id": object[prop].identity.low.toString(),
+                                            "labels": object[prop].labels,
+                                            "properties": object[prop].properties
+                                        })
+                                    }
+                                };
+                            
+                            });
+                        }
+                        
+
+                        
+
+                        let resultData = {
+                            "results": [{
+                                "data": [{
+                                    "graph": {
+                                        "nodes": newnodes,
+                                        "relationships": newrels 
+                                    }
+                                }]
+                            }],
+                            "errors": []
+                        }
+
+                        updateWithNeo4jData(resultData)
+                    } else {
+                        alert("no matches")
+                    }
+
+                // use the json
+                });
+
+            
+            // var data = {
+            //         nodes: [],
+            //         relationships: []
+            //     },
+            //     i,
+            //     label,
+            //     node,
+            //     numNodes = (maxNodesToGenerate * Math.random() << 0) + 1,
+            //     relationship,
+            //     s = size();
     
+            // for (i = 0; i < numNodes; i++) {
+            //     label = randomLabel();
+    
+            //     node = {
+            //         id: s.nodes + 1 + i,
+            //         labels: [label],
+            //         properties: {
+            //             random: label
+            //         },
+            //         x: d.x,
+            //         y: d.y
+            //     };
+    
+            //     data.nodes[data.nodes.length] = node;
+    
+            //     relationship = {
+            //         id: s.relationships + 1 + i,
+            //         type: label.toUpperCase(),
+            //         startNode: d.id,
+            //         endNode: s.nodes + 1 + i,
+            //         properties: {
+            //             from: Date.now()
+            //         },
+            //         source: d.id,
+            //         target: s.nodes + 1 + i,
+            //         linknum: s.relationships + 1 + i
+            //     };
+
+                
+            //     data.relationships[data.relationships.length] = relationship;
+            // }
+            
+            console.log(data)
             return data;
         }
     

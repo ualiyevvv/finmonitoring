@@ -56,6 +56,42 @@ class DataController {
         });
     }
 
+    async bynode(req,res) {    
+        const {prop,id} = req.query
+        console.log("id ===== ", id)
+        const session = createSession();
+        console.log('======== prop =======',prop)
+        let lable = '';
+
+        if (prop === "BIN:ID") {
+            lable = "EDU"
+        } else {
+            lable = "EDUCATION"
+        }
+
+        // let cypher = "MATCH (who:EDUCATION)-[:УЧИЛСЯ]->(where:EDU) WHERE who.`IIN:ID` = '" + id_start + "' or who.`IIN:ID` = '" + id_end + "' RETURN who, where";
+        // let cypher = 'MATCH (a:EDUCATION {`IIN:ID`:"' + id_start + '"})-[r1]->(c:EDU)<-[r2]-(b:EDUCATION {`IIN:ID`:"' + id_end + '"}) RETURN a,b,c,r1,r2';
+        // let cypher = 'MATCH p=shortestPath((a:EDUCATION {`IIN:ID`: "' + id_start + '"})-[*]-(b:EDUCATION {`IIN:ID`:"' + id_end + '"})) RETURN p';
+        let cypher = 'match p=(a:'+lable+'{`'+ prop + '`:"' + id  + '"})-[r*1..1]-(b) return p';
+
+        session.run(cypher)
+        .then(result => {
+            //     // On result, get count from first record
+            //     const count = result.records[0].get('count');
+            console.log(result.records);
+            res.json(result.records) 
+        })
+        .catch(e => {
+            // Output the error
+            console.log(e);
+        })
+        .then(() => {
+            // Close the Session
+            return session.close();
+        });
+    }
+
+
     async getAll(req, res) { 
         const {id_start, id_end} = req.query
         console.log(id_start, id_end)
