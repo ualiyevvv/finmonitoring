@@ -3,15 +3,23 @@ const path = require('path');
 
 const Router = express.Router();
 
-router.get('/by/:id', dataController.getOne);
-router.get('/between', dataController.between);
-router.get('/relations', dataController.getRelations);
-router.get('/viewappp', dataController.viewappp);
-router.get('/all', dataController.getAll);
+Router.use('/auth', require('./auth/auth'));
+Router.use('/api', require('./api/api'));
+Router.use('/file', require('./file/file'));
 
-/*Router.get('/*', (req, res) => {
+/*if(Router.get('env') === 'production') { // В development мы используем proxy
+	Router.use((req, res) => {
+		res.sendFile(require('path').resolve(__dirname, 'view/index.html'));
+	});
+} else {
+	Router.use((req, res) => {
+		res.json({message: 'No such route'});
+	});
+}*/
+
+Router.get('/*', (req, res) => {
 	res.sendFile(path.resolve(__dirname, '../../build-frontend/index.html'));
-});*/
+});
 
 Router.use((err, req, res, next)=>{
 	res.json({message: err});
