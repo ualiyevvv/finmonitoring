@@ -1,19 +1,27 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
 import {useAppContext} from "../../context/AppContext";
+import Menu from "./components/Menu";
+import MapBox from "./components/MapBox";
+import OptionsPanel from "./components/OptionsPanel";
 
 export default function MapGraph(){
 
     const navigate = useNavigate()
 
-    const {authHandler, socketHandler, adaptiveHandler} = useAppContext();
+    const { authHandler } = useAppContext();
 
-    const {user, userLoading, userError, isAuthenticated} = authHandler;
-    const {isConnected} = socketHandler;
+    const {user, isAuthenticated} = authHandler;
 
-    const { device } = adaptiveHandler;
+    return (
+        <main>
 
-    return (<>
-        <h1>Map</h1>
-    </>);
+            <Menu />
+
+            {/*<OptionsPanel />*/}
+
+            <MapBox />
+
+        </main>
+    );
 }
