@@ -33,7 +33,7 @@ export default function Logout(){
 
         </Workspace>
 
-        <Menu />
+        {/*<Menu />*/}
     </Workflow>
     );
 }
