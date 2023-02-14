@@ -14,7 +14,7 @@ run a frontend in folder neo4jd3 index2.html (instead of react frontend 'cause t
 
 ## Stack of technologies
 Backend: Node.js, Express.js <br>
-Frontend: React.js <br>
+Frontend: React.js, d3.js <br>
 Database: Neo4j <br>
 
 ## Team

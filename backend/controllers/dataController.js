@@ -36,7 +36,8 @@ class DataController {
         const session = createSession();
 
         // let cypher = "MATCH (who:EDUCATION)-[:УЧИЛСЯ]->(where:EDU) WHERE who.`IIN:ID` = '" + id_start + "' or who.`IIN:ID` = '" + id_end + "' RETURN who, where";
-        let cypher = 'MATCH (a:EDUCATION {`IIN:ID`:"' + id_start + '"})-[r1]->(c:EDU)<-[r2]-(b:EDUCATION {`IIN:ID`:"' + id_end + '"}) RETURN a,b,c,r1,r2';
+        // let cypher = 'MATCH (a:EDUCATION {`IIN:ID`:"' + id_start + '"})-[r1]->(c:EDU)<-[r2]-(b:EDUCATION {`IIN:ID`:"' + id_end + '"}) RETURN a,b,c,r1,r2';
+        let cypher = 'MATCH p=shortestPath((a:EDUCATION {`IIN:ID`: "' + id_start + '"})-[*]-(b:EDUCATION {`IIN:ID`:"' + id_end + '"})) RETURN p';
 
         session.run(cypher)
         .then(result => {
