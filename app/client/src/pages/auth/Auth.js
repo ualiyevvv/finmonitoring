@@ -8,7 +8,7 @@ import LoginForm from "./loginForms/LoginForm";
 import MultistepForm from "../../components/form/MultistepForm";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useAppContext} from "../../context/AppContext";
-import Header from "../new/Header";
+import Header from "../../components/Header";
 import Menu from "../../components/phone/Menu";
 import ClosePageIcon from "../../assets/icons/close-square.svg";
 import CloseButton from "../../components/phone/CloseButton";
