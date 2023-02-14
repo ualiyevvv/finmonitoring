@@ -16,10 +16,7 @@ import Workflow from "../../components/phone/Workflow";
 import {useNavigate} from "react-router-dom";
 import {useAppContext} from "../../context/AppContext";
 
-function MyLink({
-                    title="Page",
-                    onClick=f=>f,
-                    icon=f=>f}){
+function MyLink({ title="Page", onClick=f=>f, icon=f=>f }){
     return (
         <div className="push" onClick={onClick}>
             <div className="push__icon">{icon}</div>
@@ -35,6 +32,7 @@ export default function Profile(){
     const navigate = useNavigate()
 
     const {authHandler, socketHandler, adaptiveHandler} = useAppContext();
+
     const {user, userLoading, userError, isAuthenticated} = authHandler;
     const {isConnected} = socketHandler;
 
@@ -63,7 +61,7 @@ export default function Profile(){
 
                     {/*<MyLink title={"Chat page"} onClick={e => navigate('/chat')} icon={<ChatIcon />}/>*/}
                     {/*<MyLink title={"Order page"} onClick={e => navigate('/order')} icon={<OrderIcon />}/>*/}
-                    {/**/}
+
                     {/*<MyLink title={"Partners page"} onClick={e => navigate('/partners')} icon={<PartnerIcon />}/>*/}
                     {/*<MyLink title={"Details page"} onClick={e => navigate('/details')} icon={<DetailsIcon />}/>*/}
                 </div>

@@ -1,23 +1,23 @@
 import React, {useEffect, useState} from 'react';
 
-import {Link, Routes, Route} from "react-router-dom";
+import {Link, Routes, Route, Navigate} from "react-router-dom";
 
 import Auth from './pages/auth/Auth'
 import Logout from "./pages/auth/Logout";
 
-import Profile from './pages/profile/Profile'
+import Profile from './pages/profile/Profile';
 
-import {AppContextProvider} from "./context/AppContext";
+import AuthMiddleware from './middlewares/AuthMiddleware';
 
-import './assets/css/style.css'
-import './assets/css/adaptive.css'
+import {AppContextProvider, useAppContext} from "./context/AppContext";
+
+import './assets/css/styles.css';
 
 export default function Router(){
-	// return (<TestSocket />)
 	return (
 		<AppContextProvider>
 			<Routes>
-				<Route path="/" element={<Profile />} />
+				<Route path="/" element={<AuthMiddleware page={Profile} />} />
 
 				<Route path='/authenticate' element={<Auth />} />
 				<Route path="/logout" element={<Logout />} />
