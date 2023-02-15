@@ -98,7 +98,7 @@ main {
     position: absolute;
     top: 20px;
     right: 20px;
-    width: 300px;   
+    width: 350px;   
     background-color: white;
     border-radius: 8px;
 }
@@ -118,17 +118,37 @@ main {
 }
 .category {
     height: 40px;
-    padding: 15px;
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-bottom: 10px;
+}
+.category__name {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: white;
-    margin-bottom: 10px;
+    width: 100%;
+    padding: 15px;
     background-color: red;
     border-radius: 8px;
+    margin-left: 10px;
 }
 .category:last-child {
     margin-bottom: 0;
+}
+.input-color {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 52px;
+    height: 55px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.input-color::-webkit-color-swatch {
+    border-radius: 50%;
+    border: none;
+    /* border: 4px solid rgb(33, 33, 33);  */
 }
 
 .tabs {
@@ -145,6 +165,12 @@ main {
     width: 100%;
     cursor: pointer;
     /* border-radius: 8px; */
+}
+.tab:first-child {
+    border-radius: 8px 0 0 0;
+}
+.tab:last-child {
+    border-radius: 0 8px 0 0;
 }
 .tab span {
     margin-left: 5px;
