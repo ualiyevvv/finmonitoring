@@ -59,7 +59,7 @@ export default function Profile(){
                     <MyLink title={"Auth page"} onClick={e => navigate('/authenticate')} icon={<AuthIcon />}/>
                     <MyLink title={"Log Out page"} onClick={e => navigate('/logout')} icon={<LogOutIcon />}/>
 
-                    <MyLink title={"Map Graph page"} onClick={e => navigate('/mapgraph')} icon={<DetailsIcon />}/>
+                    <MyLink title={"Map Graph page"} onClick={e => navigate('/mapbox')} icon={<DetailsIcon />}/>
 
                     {/*<MyLink title={"Chat page"} onClick={e => navigate('/chat')} icon={<ChatIcon />}/>*/}
                     {/*<MyLink title={"Order page"} onClick={e => navigate('/order')} icon={<OrderIcon />}/>*/}
