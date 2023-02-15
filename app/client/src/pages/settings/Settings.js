@@ -27,12 +27,43 @@ export default function Settings(){
 
     return (
         <Main>
-            <h1>[Settings]</h1>
-            <ul>
-                {users.map((user, i) => {
-                    return <p key={i}>{user.id} {user.name} {user.email}</p>
-                })}
-            </ul>
+            <div class="workflow">
+                <h1>Users</h1>
+                <div className="table" id="managers">
+                    <div className="table__body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>name</th>
+                                    <th>email</th>
+                                </tr>
+                            </thead>
+                            <tbody id="flightsBody">
+                            {users.map((user, i) => {
+                                return <tr key={i}>
+                                    <td>{user.id}</td>
+                                    <td>{user.name}</td>
+                                    <td>{user.email}</td>
+                                </tr>
+                            })}
+                            </tbody>
+                        </table>
+                        {/* {selectedId !== null && (
+                            <Modal id={selectedId} onClose={handleModalClose}> 
+                                <p>Id: {selectedId}</p>
+
+                                <iframe 
+                                    scrolling="no" 
+                                    onLoad={ () => setIsMapLoading(false)} 
+                                    src={`https://flighttrack.tavtechnologies.aero/flight_track?flight=${selectedId}`} 
+                                ></iframe>
+                            </Modal>
+                        )} */}
+                    </div>
+                </div>
+            </div>
+            
 
         </Main>
     );
