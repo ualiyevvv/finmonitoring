@@ -7,13 +7,13 @@ dataController.getOne = async (req, res) => {
 }
 //'/between'
 dataController.between = async (req, res) => {
-    const {id_start, id_end} = req.query
-    console.log(id_start, id_end)
+    const {name_start, name_end} = req.query
+    console.log(name_start, name_end)
     const session = createSession();
 
     // let cypher = "MATCH (who:EDUCATION)-[:УЧИЛСЯ]->(where:EDU) WHERE who.`IIN:ID` = '" + id_start + "' or who.`IIN:ID` = '" + id_end + "' RETURN who, where";
     // let cypher = 'MATCH (a:EDUCATION {`IIN:ID`:"' + id_start + '"})-[r1]->(c:EDU)<-[r2]-(b:EDUCATION {`IIN:ID`:"' + id_end + '"}) RETURN a,b,c,r1,r2';
-    let cypher = 'MATCH p=allShortestPaths((a:EDUCATION {`IIN:ID`: "' + id_start + '"})-[*]-(b:EDU {`BIN:ID`:"' + id_end + '"})) RETURN p';
+    let cypher = 'MATCH p=allShortestPaths((a{name: "' + name_start + '"})-[*]-(b{name:"' + name_end + '"})) RETURN p';
 
     session.run(cypher)
     .then(result => {
