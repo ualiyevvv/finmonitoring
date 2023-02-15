@@ -4,12 +4,13 @@ const Router = express.Router();
 
 const controller = require('../../../controllers/api/data/data');
 
-const {} = controller;
+const {getOne, between, bynode, getAll, getRelations, viewappp} = controller;
 
-// Router.route('/')
-    // .post(access, allowedFields, c)
-    // .get(access, allowedFields, find, r)
-    // .put(access, allowedFields, findOne, u)
-    // .delete(access, findOne, d);
+Router.get('/by/:id', getOne);
+Router.get('/between', between);
+Router.get('/bynode', bynode);
+Router.get('/relations', getRelations);
+Router.get('/viewappp', viewappp);
+Router.get('/all', getAll);
 
 module.exports = Router;
