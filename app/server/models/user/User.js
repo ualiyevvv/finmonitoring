@@ -1,7 +1,5 @@
 const {Schema, model} = require('mongoose');
 
-const modelName = 'User';
-
 const UserSchema = new Schema({
 	name: {
 		type: String,
@@ -65,4 +63,4 @@ UserSchema.methods.deepDelete = async function (){
 	return this;
 }
 
-module.exports = model(modelName, UserSchema);
+module.exports = model('User', UserSchema);

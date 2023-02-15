@@ -1,23 +1,23 @@
 /**
- * CRUD
+ *
  * */
 
 const express = require('express');
 
 const Router = express.Router();
 
-const controller = require('../../../../controllers/api/chat/conversation/conversation');
+const controller = require('../../../controllers/api/fraud_case/fraud_case');
 
 const {
     c, r, u, d,
-    findOne, find,
+    findOne, find, findByQueryIds,
     filesValidation,
     addToArray, removeFromArray, arrayField
 } = controller;
 
 Router.route('/')
     .post(filesValidation, c)
-    .get(find, r)
+    .get(findByQueryIds, r)
     .put(filesValidation, findOne, u)
     .delete(findOne, d);
 
