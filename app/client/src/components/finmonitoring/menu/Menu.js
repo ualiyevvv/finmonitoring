@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 
 import Enum from '../../../../../common/Enum'
 
-function OptionsPanel({ onClose }){
+function OptionsPanel({ onClose=f=>f }){
     return (
         <div className="options_panel options_panel-active">
             <div className="options_panel__header">
@@ -50,7 +50,7 @@ export default function Menu({ }){
                 <div className="menu__item" onClick={e=>navigate('/logout')}>LogOut</div>
             </div>
 
-            {menuItem===MenuEnum.options && <OptionsPanel onClose={e => setMenuItem(toggleOptions)}/>}
+            {menuItem===MenuEnum.options && <OptionsPanel onClose={()=>setMenuItem(MenuEnum.default)}/>}
 
         </div>
     </>);
