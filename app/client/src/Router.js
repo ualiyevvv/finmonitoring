@@ -18,8 +18,6 @@ import Page404 from "./pages/404/Page404";
 import Waiting from "./pages/auth/waiting/Waiting";
 import Banned from "./pages/auth/banned/Banned";
 
-import App from "./pages/App.tsx";
-
 export default function Router(){
 	return (
 		<AppContextProvider>
@@ -34,8 +32,6 @@ export default function Router(){
 
 				<Route path="/waiting" element={<Waiting />} />
 				<Route path="/banned" element={<Banned />} />
-
-				<Route path="/app" element={<App />} />
 
 				<Route path="*" element={<AuthMiddleware page={<Page404 />} />} />
 			</Routes>
