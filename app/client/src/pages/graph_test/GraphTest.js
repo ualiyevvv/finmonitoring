@@ -8,6 +8,9 @@ import root from './data/root'
 
 import SearchText from '../mapbox/components/SearchText'
 
+function mySplit(value){
+    return value.split(', ');
+}
 
 export default function GraphTest(){
 
@@ -72,7 +75,7 @@ export default function GraphTest(){
     async function onSearch(value){
         console.log(value)
         try{
-            const res = await fetch(`/api/}`);
+            const res = await fetch(`/api/`);
             const json = await res.json();
             console.log(json);
             return json;
@@ -81,6 +84,7 @@ export default function GraphTest(){
             return null;
         }
     }
+
     return (
         <Main>
             <div className="search">
