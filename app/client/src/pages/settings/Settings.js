@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation} from "react-router-dom";
+import {Navigate, useLocation} from "react-router-dom";
 import Main from "../main/Main";
 import useUsers from "../../hooks/api/useUsers";
 import setIds from "../../../../common/handlers/setIds";
+import {useAppContext} from "../../context/AppContext";
 
 function log(...str){
     return console.log("Settings:", ...str);
@@ -27,6 +28,8 @@ function User({user, setStatus}){
 }
 
 export default function Settings(){
+
+    const {authHandler} = useAppContext()
 
     const { searchUsers, getUser } = useUsers();
 
@@ -55,6 +58,10 @@ export default function Settings(){
         }catch(e){
             console.log(e);
         }
+    }
+
+    if(authHandler.user.role !== "admin"){
+        return <Navigate to={'/'}/>
     }
 
     return (
