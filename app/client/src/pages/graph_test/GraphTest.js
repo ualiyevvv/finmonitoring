@@ -9,7 +9,6 @@ import root from './data/root'
 export default function GraphTest(){
     return (
         <Main>
-            <h1>[Graph Test]</h1>
             <Graph
                 initialState={root}
                 nodes={nodes}
