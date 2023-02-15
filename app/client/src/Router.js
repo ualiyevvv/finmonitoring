@@ -14,7 +14,7 @@ import {AppContextProvider, useAppContext} from "./context/AppContext";
 import './assets/css/styles.css';
 
 import MapBox from "./pages/mapbox/MapBox";
-import Main from "./pages/main/Main";
+import Settings from "./pages/settings/Settings";
 
 export default function Router(){
 	return (
@@ -24,6 +24,7 @@ export default function Router(){
 				<Route path="/logout" element={<Logout />} />
 
 				<Route path="/" element={<AuthMiddleware page={<MapBox />} />} />
+				<Route path="/settings" element={<AuthMiddleware page={<Settings />} />} />
 			</Routes>
 		</AppContextProvider>
 	);

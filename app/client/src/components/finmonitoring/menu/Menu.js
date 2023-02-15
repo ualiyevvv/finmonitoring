@@ -1,7 +1,5 @@
-import React, {useState} from 'react';
-import {useNavigate} from "react-router-dom";
-
-import Enum from '../../../../../common/Enum'
+import React, {useEffect, useReducer, useState} from 'react';
+import {useLocation, useNavigate} from "react-router-dom";
 
 function OptionsPanel({ onClose=f=>f }){
     return (
@@ -14,44 +12,58 @@ function OptionsPanel({ onClose=f=>f }){
     );
 }
 
-const MenuEnum = Enum({
-    default: 'default',
-    options: 'options',
-    settings: 'settings',
-    admin: 'admin',
-})
-
-function toggleOptions(prev){
-    return prev !== MenuEnum.options ? MenuEnum.options : MenuEnum.default;
+const MenuItem = {
+    mapbox: '/',
+    settings: '/settings',
+    admin: '/admin',
+    logout: '/logout',
 }
 
 export default function Menu({ }){
-
+    const location = useLocation();
     const navigate = useNavigate();
 
-    const [menuItem, setMenuItem] = useState(MenuEnum.default)
+    const [isOptionsOpen, toggleIsOptionsOpen] = useReducer(state => !state, false);
+    const [menuItem, setMenuItem] = useState('')
 
-    return (<>
+    useEffect(()=>{
+        setMenuItem(location.pathname)
+    }, [location]);
+
+    return (
         <div className="menu">
 
             <div className="menu__block">
-                <div className={`menu__item ${menuItem===MenuEnum.options?'menu__item-active':''}`}
-                     onClick={e => setMenuItem(toggleOptions)}
-                >
+                <div className={`menu__item ${isOptionsOpen?'menu__item-active':''}`}
+                     onClick={toggleIsOptionsOpen}>
                     O
                 </div>
             </div>
 
             <div className="menu__block">
                 <div className="menu__item" onClick={e=>e}>?</div>
-                <div className="menu__item" onClick={e=>e}>S</div>
+
+                <div className={`menu__item ${menuItem===MenuItem.mapbox ? 'menu__item-active' : ''}`}
+                     onClick={e=>navigate(MenuItem.mapbox)}>
+                    M
+                </div>
+
+                <div className={`menu__item ${menuItem===MenuItem.settings ? 'menu__item-active' : ''}`}
+                     onClick={e=>navigate(MenuItem.settings)}>
+                    S
+                </div>
+
                 <div className="menu__item" onClick={e=>e}>W</div>
+
                 {/*<div className="menu__item" onClick={e=>navigate('/authenticate')}>Auth</div>*/}
-                <div className="menu__item" onClick={e=>navigate('/logout')}>LogOut</div>
+                <div className={`menu__item ${menuItem===MenuItem.logout ? 'menu__item-active' : ''}`}
+                     onClick={e=>navigate(MenuItem.logout)}>
+                    LogOut
+                </div>
             </div>
 
-            {menuItem===MenuEnum.options && <OptionsPanel onClose={()=>setMenuItem(MenuEnum.default)}/>}
+            {isOptionsOpen && <OptionsPanel onClose={toggleIsOptionsOpen}/>}
 
         </div>
-    </>);
+    );
 }
