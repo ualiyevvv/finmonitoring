@@ -8,6 +8,9 @@ import root from './data/root'
 
 import SearchText from '../mapbox/components/SearchText'
 
+function mySplit(value){
+    return value.split(', ');
+}
 
 export default function GraphTest(){
 
@@ -69,7 +72,18 @@ export default function GraphTest(){
 
 
     const [value, setValue] = useState("");
-
+    async function onSearch(value){
+        console.log(value)
+        try{
+            const res = await fetch(`/api/`);
+            const json = await res.json();
+            console.log(json);
+            return json;
+        }catch(e){
+            console.log(e);
+            return null;
+        }
+    }
 
     return (
         <Main>
@@ -90,9 +104,8 @@ export default function GraphTest(){
                     Find
                 </button>
             </div>
-            { isLoading ? '' : 
-            <>
-                
+
+            {!isLoading &&
                 <ReactGraph
                     initialState={graphs}
                     nodes={nodes}
@@ -103,10 +116,8 @@ export default function GraphTest(){
                     hasInspector
                     hasTruncatedFields
                 />
-
-            </>
             }
-            
+
         </Main>
     );
 }
