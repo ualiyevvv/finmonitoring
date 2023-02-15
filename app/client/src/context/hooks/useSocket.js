@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {io} from "socket.io-client";
 
-const URL = process.env.NODE_ENV==='production' ? 'http://159.223.19.108:3000' : 'http://localhost:3000';
+const URL = process.env.NODE_ENV==='production' ? 'http://46.101.231.239:3000' : 'http://localhost:3000';
 
 const OPTS = {
     withCredentials: true
