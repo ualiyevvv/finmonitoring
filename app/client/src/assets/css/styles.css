@@ -190,5 +190,114 @@ main {
 }
 
 
+.sign {
+    background: #FFFFFF;
+    box-shadow: 2px 4px 40px rgba(30, 38, 47, 0.04);
+    border-radius: 20px;
+    border: 1px solid rgb(222, 222, 222);
 
+}
+/* .sign .btn {
+    margin-top: 24px;
+    width: 100%;
+    padding: 16px;
+} */
+.sign--style .btn {
+    width: 100%;
 
+}
+.sign__body, .register__body {
+    padding-top: 36px;
+    padding: 36px 20px 20px 20px;
+}
+.sign__body .title {
+    display: none;
+}
+.sign__body .form-workflow, .sign__body .in_form_wrapper {
+    margin-top: 0;
+}
+.sign__body .form-controls {
+    margin-top: 24px;
+}
+.sign__tabs {
+    display: flex;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+    color: #292D32;
+    font-weight: 400;
+}
+.sign__tabs .sign__tab {
+    width: 100%;
+    padding: 4px;
+    cursor: pointer;
+    border-bottom: 2px solid rgb(233, 232, 232);
+}
+.sign__tabs .sign__tab:hover {
+    color: #242d37;
+}
+.sign__tab-active {
+    border-bottom: 2px solid black !important;
+    font-weight: 600;
+}
+.sign__logo {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sign-fixed {
+    width: 464px;
+}
+.sign__wrapper {
+    height: calc(100vh - 180px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* .container {
+    position: relative;
+} */
+.close-page {
+    position: absolute;
+    top: 40px;
+    right: 20px;
+    cursor: pointer;
+}
+.admin .close-page {
+    display: none;
+}
+.sign .form-workflow {
+    padding-top: 0;
+}
+
+.input-form label, .select-form label {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #353535;
+}
+.input-form {
+    margin-bottom: 8px;
+}
+.select-form {
+    margin-bottom: 12px;
+}
+.input-form:last-child, .select-form:last-child {
+    margin-bottom: 0;
+}
+
+.input {
+    width: 100%;
+    padding: 16px 20px;
+    border: 1px solid grey;
+    box-shadow: 2px 4px 4px rgba(30, 38, 47, 0.02);
+    border-radius: 16px;
+    font-size: 14px;
+    outline-color: #1E262F;
+
+}
+.input::placeholder { /* Most modern browsers support this now. */
+    color: rgba(53, 53, 53, 0.5);
+    font-weight: 600;
+}
