@@ -53,12 +53,21 @@ dataController.getAll = async (req, res) => {
     // let cypher = 'MATCH (a:EDUCATION {`IIN:ID`:"' + id_start + '"})-[r1]->(c:EDU)<-[r2]-(b:EDUCATION {`IIN:ID`:"' + id_end + '"}) RETURN a,b,c,r1,r2';
     let cypher = 'MATCH p=(a)-[r]-(b) RETURN p';
 
+    const result = await session.run(cypher);
+
+    console.log(result.records);
+
+    await session.close();
+
+    return res.json(result.records)
+
+    /*
     session.run(cypher)
     .then(result => {
         //     // On result, get count from first record
         //     const count = result.records[0].get('count');
         console.log(result.records);
-        res.json(result.records) 
+        res.json(result.records)
     })
     .catch(e => {
         // Output the error
@@ -68,6 +77,7 @@ dataController.getAll = async (req, res) => {
         // Close the Session
         return session.close();
     });
+    * */
 }
 
 module.exports = dataController;
