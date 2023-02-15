@@ -12,29 +12,31 @@ const UserSchema = new Schema({
 		minLength: 11,
 		required: true,
 	},
+
 	password: {
 		type: String,
 		required: true,
 	},
-	entity: {
-		type: String,
-		enum: ['individual', 'juridical'], // Может ли он делать какие-то действия от лица компании или только пользоваться
-		default: 'individual'
-	},
-	company_name: {
-		type: String,
-	},
-	company: {
-		type: Schema.Types.ObjectId,
-		ref: 'Company'
-	},
+
 	phone: {
+		// регистрация по номеру телефона должна быть.
 		type: String,
+		unique: true,
+		required: true,
 	},
+
 	role: {
 		type: String,
-		enum: ['client', 'manager', 'moderator', 'partner', 'admin'],
-		default: 'client',
+		enum: ['admin', 'investigator', 'viewer', 'caseAssigner', 'caseCloser', 'caseNoteTaker'],
+		default: 'viewer',
+	},
+
+	status: {
+		type: String,
+		enum: ['banned', 'active', 'waiting']
+	},
+	ban_reasons: {
+		type: String,
 	},
 
 	createdDate: {
