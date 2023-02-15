@@ -8,6 +8,24 @@ function log(...str){
     return console.log("Settings:", ...str);
 }
 
+function User({user, setStatus}){
+    const [s, setS] = useState(user.status);
+
+    return (<tr>
+        <td>{user.id}</td>
+        <td>{user.name}</td>
+        <td>{user.email}</td>
+        <td>
+            <select onChange={e => {console.log(e.target.value); setS(e.target.value);}}>
+                <option selected={user.status === "banned"}>banned</option>
+                <option selected={user.status === "waiting"}>waiting</option>
+                <option selected={user.status === "active"}>active</option>
+            </select>
+        </td>
+        <td><button onClick={e => setStatus(user, s)}>change</button></td>
+    </tr>)
+}
+
 export default function Settings(){
 
     const { searchUsers, getUser } = useUsers();
@@ -25,9 +43,23 @@ export default function Settings(){
         })()
     }, [])
 
+    async function setStatus(user, status){
+        try{
+            const res = await fetch('/api/user', {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({id: user.id, status})
+            });
+            const json = await res.json();
+            console.log(json);
+        }catch(e){
+            console.log(e);
+        }
+    }
+
     return (
         <Main>
-            <div class="workflow">
+            <div className="workflow">
                 <h1>Users</h1>
                 <div className="table" id="managers">
                     <div className="table__body">
@@ -37,15 +69,13 @@ export default function Settings(){
                                     <th>id</th>
                                     <th>name</th>
                                     <th>email</th>
+                                    <th>status</th>
+                                    <th>tools</th>
                                 </tr>
                             </thead>
                             <tbody id="flightsBody">
                             {users.map((user, i) => {
-                                return <tr key={i}>
-                                    <td>{user.id}</td>
-                                    <td>{user.name}</td>
-                                    <td>{user.email}</td>
-                                </tr>
+                                return <User key={i} user={user} setStatus={setStatus}/>
                             })}
                             </tbody>
                         </table>
