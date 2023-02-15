@@ -46,10 +46,7 @@ function register(strategy){
     }
   }
 }
-
-
-module.exports = register;
-
+module.exports = {register, local}
 /*
 ▄───▄
 █▀█▀█

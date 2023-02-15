@@ -1,6 +1,7 @@
 /**
  * Решает circular dependency problem
  * */
+const {local} = require("./auth/register");
 
 const models = {}
 
@@ -13,17 +14,22 @@ function initialize(){
     models.User.findOne({email: "admin@admin"})
         .then(defaultAdmin => {
             if (!defaultAdmin) {
-                new models.User({
+                const userData = {
                     name: "admin",
                     email: "admin@admin",
                     password: "admin",
                     phone: "8 777 777 7777",
                     role: "admin",
                     status: "active",
-                })
-                    .save()
-                    .then(r => console.log("Created Default Admin"))
-                    .catch(e => console.log("Error when creating default admin", e));
+                }
+                local(userData)
+                    .then(r => {
+                        if(r.created){
+                            console.log("Default admin successfully created");
+                        } else {
+                            console.log("Error on creating default admin", e.message);
+                        }
+                    })
             }
         });
 }
