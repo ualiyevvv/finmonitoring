@@ -11,12 +11,15 @@ Router.get('/', (req, res)=>{
 
 Router.post('/', passport.authenticate('local', {failureMessage: true}), (req, res)=>{
     // console.log(req.user);
+	const user = req.user
 	res.json({
-		id: req.user.id,
-		name: req.user.name,
-		email: req.user.email,
-		entity: req.user.entity,
-		role: req.user.role,
+		id: user.id,
+		name: user.name,
+		email: user.email,
+		phone: user.phone,
+		role: user.role,
+		status: user.status,
+		ban_reasons: user.ban_reasons,
 	});
 });
 

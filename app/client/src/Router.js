@@ -16,6 +16,7 @@ import Settings from "./pages/settings/Settings";
 import GraphTest from "./pages/graph_test/GraphTest";
 import Page404 from "./pages/404/Page404";
 import Waiting from "./pages/auth/waiting/Waiting";
+import Banned from "./pages/auth/banned/Banned";
 
 export default function Router(){
 	return (
@@ -29,7 +30,8 @@ export default function Router(){
 
 				<Route path="/graph_test" element={<AuthMiddleware page={<GraphTest />} />} />
 
-				<Route path="/waiting" element={<AuthMiddleware page={<Waiting />} />} />
+				<Route path="/waiting" element={<Waiting />} />
+				<Route path="/banned" element={<Banned />} />
 				<Route path="*" element={<AuthMiddleware page={<Page404 />} />} />
 			</Routes>
 		</AppContextProvider>

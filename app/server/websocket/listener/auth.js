@@ -6,8 +6,10 @@ module.exports = socket => {
             id: user.id,
             name: user.name,
             email: user.email,
-            entity: user.entity,
+            phone: user.phone,
             role: user.role,
+            status: user.status,
+            ban_reasons: user.ban_reasons,
         }
 
         setUser(response);
