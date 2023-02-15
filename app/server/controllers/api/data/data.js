@@ -45,8 +45,8 @@ dataController.viewappp = async (req, res) => {
 }
 //'/all'
 dataController.getAll = async (req, res) => {
-    const {id_start, id_end} = req.query
-    console.log(id_start, id_end)
+    // const {id_start, id_end} = req.query
+    // console.log(id_start, id_end)
     const session = createSession();
 
     // let cypher = "MATCH (who:EDUCATION)-[:УЧИЛСЯ]->(where:EDU) WHERE who.`IIN:ID` = '" + id_start + "' or who.`IIN:ID` = '" + id_end + "' RETURN who, where";
