@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 
 import {Link, Routes, Route, Navigate} from "react-router-dom";
 
-import Auth from './pages/auth/Auth'
-import Logout from "./pages/auth/Logout";
+import Auth from './pages/auth/auth/Auth'
+import Logout from "./pages/auth/logout/Logout";
 
 import AuthMiddleware from './middlewares/AuthMiddleware';
 
@@ -15,6 +15,7 @@ import MapBox from "./pages/mapbox/MapBox";
 import Settings from "./pages/settings/Settings";
 import GraphTest from "./pages/graph_test/GraphTest";
 import Page404 from "./pages/404/Page404";
+import Waiting from "./pages/auth/waiting/Waiting";
 
 export default function Router(){
 	return (
@@ -28,6 +29,7 @@ export default function Router(){
 
 				<Route path="/graph_test" element={<AuthMiddleware page={<GraphTest />} />} />
 
+				<Route path="/waiting" element={<AuthMiddleware page={<Waiting />} />} />
 				<Route path="*" element={<AuthMiddleware page={<Page404 />} />} />
 			</Routes>
 		</AppContextProvider>

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import InputForm from "../../../components/form/InputForm";
-import FormWrapper from "../../../components/form/FormWrapper";
+import InputForm from "../../../../components/form/InputForm";
+import FormWrapper from "../../../../components/form/FormWrapper";
 
 export default function UserForm({entity, name, company_name, phone, email, updateFields=f=>f }){
         useEffect(()=>{

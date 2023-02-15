@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {Link, useNavigate} from "react-router-dom";
-import {useAppContext} from "../../context/AppContext";
+import {useAppContext} from "../../../context/AppContext";
 
-import LogOutIcon from '../../assets/icons/log out.svg'
-import Main from "../main/Main";
+import LogOutIcon from '../../../assets/icons/log out.svg'
+import Main from "../../main/Main";
 
 export default function Logout(){
     const navigate = useNavigate();
