@@ -16,7 +16,9 @@ function OptionsPanel({ onClose }){
 
 const MenuEnum = Enum({
     default: 'default',
-    options: 'options'
+    options: 'options',
+    settings: 'settings',
+    admin: 'admin',
 })
 
 function toggleOptions(prev){
