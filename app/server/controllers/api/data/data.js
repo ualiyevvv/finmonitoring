@@ -45,21 +45,23 @@ dataController.viewappp = async (req, res) => {
 }
 //'/all'
 dataController.getAll = async (req, res) => {
-    // const {id_start, id_end} = req.query
-    // console.log(id_start, id_end)
-    const session = createSession();
+    try{
+        // const {id_start, id_end} = req.query
+        // console.log(id_start, id_end)
+        const session = createSession();
 
-    // let cypher = "MATCH (who:EDUCATION)-[:УЧИЛСЯ]->(where:EDU) WHERE who.`IIN:ID` = '" + id_start + "' or who.`IIN:ID` = '" + id_end + "' RETURN who, where";
-    // let cypher = 'MATCH (a:EDUCATION {`IIN:ID`:"' + id_start + '"})-[r1]->(c:EDU)<-[r2]-(b:EDUCATION {`IIN:ID`:"' + id_end + '"}) RETURN a,b,c,r1,r2';
-    let cypher = 'MATCH p=(a)-[r]-(b) RETURN p';
+        // let cypher = "MATCH (who:EDUCATION)-[:УЧИЛСЯ]->(where:EDU) WHERE who.`IIN:ID` = '" + id_start + "' or who.`IIN:ID` = '" + id_end + "' RETURN who, where";
+        // let cypher = 'MATCH (a:EDUCATION {`IIN:ID`:"' + id_start + '"})-[r1]->(c:EDU)<-[r2]-(b:EDUCATION {`IIN:ID`:"' + id_end + '"}) RETURN a,b,c,r1,r2';
+        let cypher = 'MATCH p=(a)-[r]-(b) RETURN p';
 
-    const result = await session.run(cypher);
+        const result = await session.run(cypher);
 
-    console.log(result.records);
+        console.log(result.records);
 
-    await session.close();
+        await session.close();
 
-    return res.json(result.records)
+        return res.json(result.records)
+    }catch(e){console.log(e)}
 
     /*
     session.run(cypher)
