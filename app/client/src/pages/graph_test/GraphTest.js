@@ -15,34 +15,37 @@ export default function GraphTest(){
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        setIsLoading(true)
         fetch("/api/data/all")
             .then(response => response.json())
-            .then(result => {
-                let data = result
+            .then(data => {
                 console.log(data)
-                let newnodes = []
-                let newrels = []
+
+                const newnodes = []
+                const newrels = []
+
                 for (let i=0;i<data.length;i++) {
-                    console.log(data[i]._fields[0])
+                    // console.log(data[i]._fields[0])
                     let originalArray = data[i]._fields[0].segments;
-                    console.log(originalArray)
+                    // console.log(originalArray)
                     originalArray.forEach(function(object) {
-                        // console.log(object1)
                         for (let prop in object) {
+                            // console.log(object[prop])
+
                             if (!object[prop].labels) {
                                 // console.log(object)
                                 // indexesRel.push(object[prop].identity.low.toString())
                                 newrels.push({
-                                    "id": "e025a50dbaae7186e51" + object[prop].identity.low.toString(),
-                                    "startNodeId": "e025a50dbaae7186e51" + object[prop].start.low.toString(),
-                                    "endNodeId": "e025a50dbaae7186e51" + object[prop].end.low.toString(),
+                                    "id": object[prop].identity.low.toString() + "000000000000000000",
+                                    "startNodeId": object[prop].start.low.toString() + "0000000000000000000",
+                                    "endNodeId": object[prop].end.low.toString() + "0000000000000000000",
                                     "properties": object[prop].properties,
                                     "type": object[prop].type,
                                 });
                             } else {
                                 // indexes.push(object[prop].identity.low.toString())
                                 newnodes.push({
-                                    "id": "e025a50dbaae7186e51" + object[prop].identity.low.toString(),
+                                    "id": object[prop].identity.low.toString() + "0000000000000000000",
                                     "labels": object[prop].labels,
                                     "properties": object[prop].properties
                                 })
@@ -52,7 +55,7 @@ export default function GraphTest(){
                     });
                 }
 
-                var resultData = {
+                const resultData = {
                     "nodes": newnodes,
                     "relationships": newrels
                 }
