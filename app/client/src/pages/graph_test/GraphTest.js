@@ -17,7 +17,7 @@ export default function GraphTest(){
     const [graphs, setGraphs] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
+    async function getAll(){
         setIsLoading(true)
         fetch("/api/data/all")
             .then(response => response.json())
@@ -67,8 +67,11 @@ export default function GraphTest(){
                 setIsLoading(false);
 
             });
+    }
 
-    }, []);
+    // useEffect(() => {
+    //     getAll();
+    // }, []);
 
 
     const [value, setValue] = useState("");
@@ -86,7 +89,7 @@ export default function GraphTest(){
             console.log(e);
             return null;
         }
-        setIsLoading(false)
+        await getAll()
     }
 
     return (
