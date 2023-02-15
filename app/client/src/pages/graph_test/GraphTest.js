@@ -79,6 +79,7 @@ export default function GraphTest(){
         setIsLoading(true)
         setValue("")
         const arr = mySplit(value)
+        console.log(arr);
         const query = {name_start:arr[0], name_end:arr[1]}
         try{
             const res = await fetch("/api/data/between?" + new URLSearchParams(query));
