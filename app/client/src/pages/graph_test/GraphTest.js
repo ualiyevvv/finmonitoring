@@ -73,9 +73,12 @@ export default function GraphTest(){
 
     const [value, setValue] = useState("");
     async function onSearch(value){
-        console.log(value)
+        setIsLoading(true)
+        setValue("")
+        const arr = mySplit(value)
+        const query = {name_start:arr[0], name_end:arr[1]}
         try{
-            const res = await fetch(`/api/`);
+            const res = await fetch("/api/data/between?" + new URLSearchParams(query));
             const json = await res.json();
             console.log(json);
             return json;
@@ -83,6 +86,7 @@ export default function GraphTest(){
             console.log(e);
             return null;
         }
+        setIsLoading(false)
     }
 
     return (
