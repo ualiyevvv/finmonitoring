@@ -6,7 +6,7 @@ const colors = require('./logging/colors');
 const mongoose = require('mongoose');
 const path = require('path');
 
-credentials.dbUri = 'mongodb://127.0.0.1:27017/finmonitoring';
+// credentials.dbUri = 'mongodb://127.0.0.1:27017/finmonitoring';
 mongoose.connect(credentials.dbUri, {useNewUrlParser: true})
 	.then(() => {
 		console.log(colors.green(`MongoDB connected`), colors.gray(`${credentials.dbUri}`));
