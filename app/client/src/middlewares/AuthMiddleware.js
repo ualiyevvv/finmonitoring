@@ -11,5 +11,5 @@ export default function AuthMiddleware({ page }){
         return <Navigate to={'/authenticate'}/>
     }
 
-    return page();
+    return page;
 }

@@ -2,12 +2,13 @@ import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {useAppContext} from "../../context/AppContext";
 
-import MapBox from "./components/mapbox/MapBox";
 import Main from "../main/Main";
-import SearchText from "./components/mapbox/SearchText";
-import OverviewPanel from "./components/mapbox/OverviewPanel";
 
-export default function MapGraph(){
+import SearchText from "./components/SearchText";
+import Map from "./components/Map";
+import OverviewPanel from "./components/OverviewPanel";
+
+export default function MapBox(){
     const navigate = useNavigate()
     const { authHandler } = useAppContext();
     const { user, isAuthenticated } = authHandler;
@@ -15,16 +16,13 @@ export default function MapGraph(){
     const [nodes, setNodes] = useState([{name: "alar", num:10}])
     const [relationships, setRelationships] = useState([{name: "ayan", num:23}])
 
-
     return (
         <Main>
             <div className="mapbox">
 
                 <SearchText onSearch={value => console.log("searched:", value)}/>
 
-                <div className="map">
-
-                </div>
+                <Map />
 
                 <OverviewPanel
                     nodes={nodes}
