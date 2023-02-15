@@ -87,11 +87,13 @@ main {
 
 .search {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 80px;
+    left: 80px;
     width: 400px;
     display: flex;
     border-radius: 8px;
+    border: 1px solid gray;
+    z-index: 111;
 }
 
 .panel {

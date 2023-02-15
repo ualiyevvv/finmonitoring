@@ -6,6 +6,8 @@ import nodes from './data/nodes'
 import relationships from './data/relationships'
 import root from './data/root'
 
+import SearchText from '../mapbox/components/SearchText'
+
 
 export default function GraphTest(){
 
@@ -62,9 +64,31 @@ export default function GraphTest(){
 
     }, []);
 
+
+    const [value, setValue] = useState("");
+
+
     return (
         <Main>
             { isLoading ? '' : 
+            <>
+                <div className="search">
+                    <input
+                        className="input input-search"
+                        type="text"
+                        name="search"
+                        placeholder="Search text..."
+                        onChange={e => setValue(e.target.value)}
+                        value={value}
+                    />
+
+                    <button
+                        className="btn btn-search"
+                        onClick={e => onSearch(value)}
+                    >
+                        Find
+                    </button>
+                </div>
                 <ReactGraph
                     initialState={graphs}
                     nodes={nodes}
@@ -75,6 +99,8 @@ export default function GraphTest(){
                     hasInspector
                     hasTruncatedFields
                 />
+
+            </>
             }
             
         </Main>
