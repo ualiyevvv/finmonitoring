@@ -1,11 +1,9 @@
 import React, {useEffect} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import {useAppContext} from "../../context/AppContext";
-import Workspace from "../../components/phone/Workspace";
-import Menu from "../../components/phone/Menu";
-import Workflow from "../../components/phone/Workflow";
 
 import LogOutIcon from '../../assets/icons/log out.svg'
+import Main from "../main/Main";
 
 export default function Logout(){
     const navigate = useNavigate();
@@ -19,21 +17,12 @@ export default function Logout(){
     }
 
     return (
-    <Workflow>
-
-        <Workspace>
-            <h1 style={{textAlign: "center"}}>[Logout page]</h1>
-
-            <div className="push" onClick={onLogout}>
-                <div className="push__icon"><LogOutIcon /></div>
-                <div className="push__info">
-                    <div style={{color: "red"}} className="push__title">Logout</div>
-                </div>
+        <Main>
+            <div>
+                <h1>[Logout page]</h1>
+                <LogOutIcon />
+                <button onClick={onLogout}>Logout</button>
             </div>
-
-        </Workspace>
-
-        {/*<Menu />*/}
-    </Workflow>
+        </Main>
     );
 }
