@@ -1,6 +1,6 @@
 import React from 'react';
 import Main from "../main/Main";
-import ReactGraph from "react-graph";
+import Graph from "react-graph";
 
 import nodes from './data/nodes'
 import relationships from './data/relationships'
@@ -10,7 +10,7 @@ export default function GraphTest(){
     return (
         <Main>
             <h1>[Graph Test]</h1>
-            <ReactGraph
+            <Graph
                 initialState={root}
                 nodes={nodes}
                 relationships={relationships}

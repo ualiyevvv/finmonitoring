@@ -5,8 +5,6 @@ import {Link, Routes, Route, Navigate} from "react-router-dom";
 import Auth from './pages/auth/Auth'
 import Logout from "./pages/auth/Logout";
 
-import Profile from './archive/profile/Profile';
-
 import AuthMiddleware from './middlewares/AuthMiddleware';
 
 import {AppContextProvider, useAppContext} from "./context/AppContext";
