@@ -732,7 +732,8 @@
                             }],
                             "errors": []
                         }
-
+                        console.log("newnodes = ", newnodes)
+                        console.log("newrels = ", newrels)
                         updateWithNeo4jData(resultData)
                     } else {
                         alert("no matches")
