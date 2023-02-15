@@ -12,23 +12,34 @@ function OptionsPanel({ onClose=f=>f }){
     );
 }
 
-const MenuItem = {
+function MenuItem({menuItem, name, url}){
+    const navigate = useNavigate();
+
+    return (
+        <div className={`menu__item ${menuItem===url ? 'menu__item-active' : ''}`}
+             onClick={e=>navigate(url)}>
+            {name}
+        </div>
+    );
+}
+
+
+const MenuItems = {
     mapbox: '/',
     settings: '/settings',
     admin: '/admin',
     logout: '/logout',
+    graph_test: '/graph_test',
 }
+
 
 export default function Menu({ }){
     const location = useLocation();
-    const navigate = useNavigate();
 
     const [isOptionsOpen, toggleIsOptionsOpen] = useReducer(state => !state, false);
     const [menuItem, setMenuItem] = useState('')
 
-    useEffect(()=>{
-        setMenuItem(location.pathname)
-    }, [location]);
+    useEffect(()=>setMenuItem(location.pathname), [location]);
 
     return (
         <div className="menu">
@@ -43,23 +54,15 @@ export default function Menu({ }){
             <div className="menu__block">
                 <div className="menu__item" onClick={e=>e}>?</div>
 
-                <div className={`menu__item ${menuItem===MenuItem.mapbox ? 'menu__item-active' : ''}`}
-                     onClick={e=>navigate(MenuItem.mapbox)}>
-                    M
-                </div>
-
-                <div className={`menu__item ${menuItem===MenuItem.settings ? 'menu__item-active' : ''}`}
-                     onClick={e=>navigate(MenuItem.settings)}>
-                    S
-                </div>
+                <MenuItem menuItem={menuItem} name={'M'} url={MenuItems.mapbox}/>
+                <MenuItem menuItem={menuItem} name={'GraphTest'} url={MenuItems.graph_test}/>
+                <MenuItem menuItem={menuItem} name={'S'} url={MenuItems.settings}/>
 
                 <div className="menu__item" onClick={e=>e}>W</div>
 
                 {/*<div className="menu__item" onClick={e=>navigate('/authenticate')}>Auth</div>*/}
-                <div className={`menu__item ${menuItem===MenuItem.logout ? 'menu__item-active' : ''}`}
-                     onClick={e=>navigate(MenuItem.logout)}>
-                    LogOut
-                </div>
+                <MenuItem menuItem={menuItem} name={'LogOut'} url={MenuItems.logout}/>
+
             </div>
 
             {isOptionsOpen && <OptionsPanel onClose={toggleIsOptionsOpen}/>}
